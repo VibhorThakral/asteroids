@@ -3,9 +3,15 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 class Player(CircleShape):
+  containers = None
+
   def __init__(self, x, y):
     super().__init__(x,y, PLAYER_RADIUS)
-    self.rotation = 0
+    self.rotation = 0    
+
+    if Player.containers is not None:
+       for group in Player.containers:
+          group.add(self)    
   
   def triangle(self):
     forward = pygame.Vector2(0, 1).rotate(self.rotation)
